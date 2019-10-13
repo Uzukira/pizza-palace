@@ -1,0 +1,75 @@
+# pizza function
+
+available_pizzas = ["0. Hawaiian $8.50 ", "1. Margarita $8.50 ", "2. Meat lovers $8.50 ", "3. Classic Cheese $8.50 ",
+                    "4.Pepperoni $8.50 ", "5. Ham and Cheese $8.50 ", "6. Beef and Onion $8.50 ",
+                    "7. BBQ Meat Deluxe $13.50 ", "8. Chicken Deluxe $13.50 ",
+                    "9. BBQ Chicken and Bacon Deluxe $13.50 ", "10. Seafood Deluxe $13.50 ",
+                    "11. Apricot Chicken Deluxe $13.50 "]
+
+available_toppings = ["0. Cheese", "1. Ham", "2. Pineapple", "3. Tomatoes", "4. Bacon", "5. Pepperoni", "6. Jalapeno",
+                      "7. BBQ Sauce", "8. Aioli Sauce", "9. Mayonnaise", "10. Onions", "11. Sausage"]
+
+
+def pizza_list(question, list_in):
+    confirmation = "n"
+
+    users_pizzas = []
+
+    while len(users_pizzas) < 5:
+
+        what_pizza = input(question)
+
+        incorrect = True
+
+        if len(users_pizzas) == 5:
+            return users_pizzas
+
+        elif what_pizza.isdigit() is True and len(users_pizzas) < 5 and confirmation == "n":
+            what_pizza_int = int(what_pizza)
+            if what_pizza_int < 12:
+                users_pizzas.append(list_in[what_pizza_int])
+
+                print(users_pizzas)
+            else:
+                print("that number is not on our list")
+
+        elif len(users_pizzas) == 0:
+            print("There are no pizzas on your list")
+
+        else:
+            while incorrect is True and len(users_pizzas) != 5:
+                confirmation = input("Are you sure you are finished ordering pizzas? (y/n) ")
+                if confirmation == "y":
+                    return users_pizzas
+                elif confirmation == "n":
+                    incorrect = False
+                    continue
+                else:
+                    print("please enter y or n ")
+    return users_pizzas
+
+
+def toppings(question, list_in):
+    pizzas = list_in
+    users_toppings = []
+    pizza_topping = input(question)
+    int_pizza_topping = int(pizza_topping)
+    while len(users_toppings) < 3:
+        if int_pizza_topping < 12:
+            users_toppings.append(pizzas[int_pizza_topping])
+        return users_toppings
+
+print(available_pizzas)
+
+pizzas = pizza_list("Enter the number of the pizza you would like and press any letter when finished ordering"
+                    " (pizza limit is 5) ", available_pizzas)
+
+pizza1_top = input("Would you like extra toppings on your first pizza for $0.50 (y/n) ")
+if pizza1_top == "y":
+    print(available_toppings)
+    pizza_topping = toppings("Enter the number of the extra topping you would like on this pizza from the list above ",
+                              available_toppings)
+    pizza1_top = pizza_topping
+
+print("The pizzas you are ordering are {}".format(pizzas))
+print("The toppings for {} are extra: {}".format(pizzas[0],pizza1_top))
