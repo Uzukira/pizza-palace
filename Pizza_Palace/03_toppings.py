@@ -9,6 +9,8 @@ available_pizzas = ["0. Hawaiian $8.50 ", "1. Margarita $8.50 ", "2. Meat lovers
 available_toppings = ["0. Cheese", "1. Ham", "2. Pineapple", "3. Tomatoes", "4. Bacon", "5. Pepperoni", "6. Jalapeno",
                       "7. BBQ Sauce", "8. Aioli Sauce", "9. Mayonnaise", "10. Onions", "11. Sausage"]
 
+cost = 0
+
 another = "y"
 
 pizza1_top_list = []
@@ -16,6 +18,11 @@ pizza2_top_list = []
 pizza3_top_list = []
 pizza4_top_list = []
 pizza5_top_list = []
+
+pizza2_top = ""
+pizza3_top = ""
+pizza4_top = ""
+pizza5_top = ""
 
 
 def pizza_list(question, list_in):
@@ -143,14 +150,54 @@ if len(pizzas) > 4:
             another = input("Would you like another extra topping? (y/<enter> for no) ")
         another = "y"
 
+classic_pizzas = ["0. Hawaiian $8.50 ", "1. Margarita $8.50 ", "2. Meat lovers $8.50 ", "3. Classic Cheese $8.50 ",
+                  "4.Pepperoni $8.50 ", "5. Ham and Cheese $8.50 ", "6. Beef and Onion $8.50 "]
+
+deluxe_pizzas = ["7. BBQ Meat Deluxe $13.50 ", "8. Chicken Deluxe $13.50 ", "9. BBQ Chicken and Bacon Deluxe $13.50 ",
+                 "10. Seafood Deluxe $13.50 ", "11. Apricot Chicken Deluxe $13.50 "]
+
 print("The pizzas you are ordering are {}".format(pizzas))
-if pizza1_top != "y":
+if len(pizza1_top_list) > 0:
     print("The toppings for {} are extra: {}".format(pizzas[0], pizza1_top_list))
-if len(pizzas) > 1 and pizza2_top != "y":
+if len(pizzas) > 1 and len(pizza2_top_list) > 0:
     print("The toppings for {} are extra: {}".format(pizzas[1], pizza2_top_list))
-if len(pizzas) > 2 and pizza3_top != "y":
+if len(pizzas) > 2 and len(pizza3_top_list) > 0:
     print("The toppings for {} are extra: {}".format(pizzas[2], pizza3_top_list))
-if len(pizzas) > 3 and pizza4_top != "y":
+if len(pizzas) > 3 and len(pizza4_top_list) > 0:
     print("The toppings for {} are extra: {}".format(pizzas[3], pizza4_top_list))
-if len(pizzas) > 4 and pizza5_top != "y":
+if len(pizzas) > 4 and len(pizza5_top_list) > 0:
     print("The toppings for {} are extra: {}".format(pizzas[4], pizza5_top_list))
+
+if pizzas[0] in classic_pizzas:
+    cost += 8.5
+if pizzas[0] in deluxe_pizzas:
+    cost += 13.5
+if len(pizzas) > 1 and pizzas[1] in classic_pizzas:
+    cost += 8.5
+if len(pizzas) > 1 and pizzas[1] in deluxe_pizzas:
+    cost += 13.5
+if len(pizzas) > 2 and pizzas[2] in classic_pizzas:
+    cost += 8.5
+if len(pizzas) > 2 and pizzas[2] in deluxe_pizzas:
+    cost += 13.5
+if len(pizzas) > 3 and pizzas[3] in classic_pizzas:
+    cost += 8.5
+if len(pizzas) > 3 and pizzas[3] in deluxe_pizzas:
+    cost += 13.5
+if len(pizzas) > 4 and pizzas[4] in classic_pizzas:
+    cost += 8.5
+if len(pizzas) > 4 and pizzas[4] in deluxe_pizzas:
+    cost += 13.5
+
+if len(pizza1_top_list) > 0:
+    cost += (len(pizza1_top_list)*0.5)
+if len(pizza2_top_list) > 0:
+    cost += (len(pizza2_top_list)*0.5)
+if len(pizza3_top_list) > 0:
+    cost += (len(pizza3_top_list)*0.5)
+if len(pizza4_top_list) > 0:
+    cost += (len(pizza4_top_list)*0.5)
+if len(pizza5_top_list) > 0:
+    cost += (len(pizza5_top_list)*0.5)
+
+print("The total cost is ${} ".format(format(cost, '.2f')))
