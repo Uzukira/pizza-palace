@@ -8,13 +8,15 @@ def pick_delivery(question):
 
     valid = False
     while not valid:
+        # Asks question
         response = input(question).lower()
-
+        # If reply yes then return delivery
         if response in ["y", "yes"]:
             return "delivery"
-
+        # If reply no then return pick up
         elif response == "n":
             return "pick up"
+        # If neither yes or no then print error message and ask again
         else:
             print(error)
             continue
@@ -27,29 +29,32 @@ def pizza_list(question, list_in):
     users_pizzas = []
 
     while len(users_pizzas) < 5:
-
+        # Asks question
         what_pizza = input(question)
 
         incorrect = True
-
+        # Return pizza list if list is full
         if len(users_pizzas) == 5:
             return users_pizzas
 
         elif what_pizza.isdigit() is True and len(users_pizzas) < 5 and confirmation == "n":
+            # Change response to an integer
             what_pizza_int = int(what_pizza)
             if what_pizza_int < 12:
+                # Adds the users requested pizza to the list
                 users_pizzas.append(list_in[what_pizza_int])
 
                 print(users_pizzas)
                 print()
+            # If request is not valid
             else:
                 print("that number is not on our list")
                 print()
-
+        # If user tries to finish order then run error message and ask question again
         elif len(users_pizzas) == 0:
             print("There are no pizzas on your list")
             print()
-
+        # Ask users if they confirm they are finished, if yes return list, if no, ask question again
         else:
             while incorrect is True and len(users_pizzas) != 5:
                 confirmation = input("Are you sure you are finished ordering pizzas? (y/n) ").lower()
@@ -68,8 +73,11 @@ def pizza_list(question, list_in):
 # Toppings function
 def toppings(question, list_in):
     pizza = list_in
+    # Asks question
     pizza_toppings = input(question)
+    # Convert response to integer
     int_pizza_topping = int(pizza_toppings)
+    # Check if response is in list, if yes return topping, if no print error and ask question again
     if int_pizza_topping < 12:
         users_toppings = pizza[int_pizza_topping]
         return users_toppings
@@ -331,14 +339,20 @@ while cancel is "y" or cancel is "Y":
         print()
         address = input("What is your delivery address? ")
         print()
+        phone_number = input("What is your phone number? ")
+        print()
         cost += 3
-        print("Your order is a delivery order for {} to {}".format(name.capitalize(), address))
+        print("Your order is a delivery order for {} to {} and your phone number is {}".format(name.capitalize(),
+                                                                                               address, phone_number))
         print()
 
     else:
         name = input("What is your name? ")
         print()
-        print("Your order is a pick up order for {}".format(name.capitalize()))
+        phone_number = input("What is your phone number? ")
+        print()
+        print("Your order is a pick up order for {} and your phone number is {}".format(name.capitalize(),
+                                                                                        phone_number))
         print()
 
     # Print pizzas and pizza toppings
