@@ -1,7 +1,7 @@
 cancel = "y"
 
 
-# Toppings function
+# Pick up or delivery function
 def pick_delivery(question):
 
     error = "Sorry, we didn't get that"
@@ -65,7 +65,7 @@ def pizza_list(question, list_in):
     return users_pizzas
 
 
-# Pick up or delivery function
+# Toppings function
 def toppings(question, list_in):
     pizza = list_in
     pizza_toppings = input(question)
