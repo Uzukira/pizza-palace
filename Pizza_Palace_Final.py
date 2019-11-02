@@ -1,6 +1,85 @@
 cancel = "y"
-while cancel is "y":
-    # pizza function
+
+
+# Toppings function
+def pick_delivery(question):
+
+    error = "Sorry, we didn't get that"
+
+    valid = False
+    while not valid:
+        response = input(question).lower()
+
+        if response in ["y", "yes"]:
+            return "delivery"
+
+        elif response == "n":
+            return "pick up"
+        else:
+            print(error)
+            continue
+
+
+# Pizzas to list function
+def pizza_list(question, list_in):
+    confirmation = "n"
+
+    users_pizzas = []
+
+    while len(users_pizzas) < 5:
+
+        what_pizza = input(question)
+
+        incorrect = True
+
+        if len(users_pizzas) == 5:
+            return users_pizzas
+
+        elif what_pizza.isdigit() is True and len(users_pizzas) < 5 and confirmation == "n":
+            what_pizza_int = int(what_pizza)
+            if what_pizza_int < 12:
+                users_pizzas.append(list_in[what_pizza_int])
+
+                print(users_pizzas)
+                print()
+            else:
+                print("that number is not on our list")
+                print()
+
+        elif len(users_pizzas) == 0:
+            print("There are no pizzas on your list")
+            print()
+
+        else:
+            while incorrect is True and len(users_pizzas) != 5:
+                confirmation = input("Are you sure you are finished ordering pizzas? (y/n) ").lower()
+                print()
+                if confirmation == "y":
+                    return users_pizzas
+                elif confirmation == "n":
+                    incorrect = False
+                    continue
+                else:
+                    print("please enter 'y' or 'n' ")
+                    print()
+    return users_pizzas
+
+
+# Pick up or delivery function
+def toppings(question, list_in):
+    pizza = list_in
+    pizza_toppings = input(question)
+    int_pizza_topping = int(pizza_toppings)
+    if int_pizza_topping < 12:
+        users_toppings = pizza[int_pizza_topping]
+        return users_toppings
+    else:
+        print("please enter a number between 0 and 12")
+
+
+# Cancel of new order loop
+while cancel is "y" or cancel is "Y":
+    # Defining variables
     another_valid = False
 
     toppings_confirm = False
@@ -36,79 +115,6 @@ while cancel is "y":
     pizza4_top = ""
     pizza5_top = ""
 
-
-    def pick_delivery(question):
-
-        error = "Sorry, we didn't get that"
-
-        valid = False
-        while not valid:
-            response = input(question).lower()
-
-            if response in ["y", "yes"]:
-                return "delivery"
-
-            elif response == "n":
-                return "pick up"
-            else:
-                print(error)
-                continue
-
-
-    def pizza_list(question, list_in):
-        confirmation = "n"
-
-        users_pizzas = []
-
-        while len(users_pizzas) < 5:
-
-            what_pizza = input(question)
-
-            incorrect = True
-
-            if len(users_pizzas) == 5:
-                return users_pizzas
-
-            elif what_pizza.isdigit() is True and len(users_pizzas) < 5 and confirmation == "n":
-                what_pizza_int = int(what_pizza)
-                if what_pizza_int < 12:
-                    users_pizzas.append(list_in[what_pizza_int])
-
-                    print(users_pizzas)
-                    print()
-                else:
-                    print("that number is not on our list")
-                    print()
-
-            elif len(users_pizzas) == 0:
-                print("There are no pizzas on your list")
-                print()
-
-            else:
-                while incorrect is True and len(users_pizzas) != 5:
-                    confirmation = input("Are you sure you are finished ordering pizzas? (y/n) ").lower()
-                    print()
-                    if confirmation == "y":
-                        return users_pizzas
-                    elif confirmation == "n":
-                        incorrect = False
-                        continue
-                    else:
-                        print("please enter 'y' or 'n' ")
-                        print()
-        return users_pizzas
-
-
-    def toppings(question, list_in):
-        pizza = list_in
-        pizza_toppings = input(question)
-        int_pizza_topping = int(pizza_toppings)
-        if int_pizza_topping < 12:
-            users_toppings = pizza[int_pizza_topping]
-            return users_toppings
-        else:
-            print("please enter a number between 0 and 12")
-
     # main routine
     order_type = pick_delivery("Would you like to have your order delivered? (y/n) ").lower()
 
@@ -117,10 +123,12 @@ while cancel is "y":
     print(deluxe_pizzas)
     print()
 
+    # Add pizzas to users list
     pizzas = pizza_list("Enter the number of the pizza you would like and press any letter when finished ordering"
                         " (pizza limit is 5) ", available_pizzas)
     print()
 
+    # Add toppings to respective pizzas
     pizza1_top = input("Would you like extra toppings on your first pizza for $0.50 (maximum of 3) (y/n) ").lower()
     print()
     while toppings_confirm is False:
@@ -317,21 +325,23 @@ while cancel is "y":
                      "9. BBQ Chicken and Bacon Deluxe $13.50 ", "10. Seafood Deluxe $13.50 ",
                      "11. Apricot Chicken Deluxe $13.50 "]
 
+    # delivery info and charges
     if order_type == "delivery":
         name = input("What is your name? ")
         print()
         address = input("What is your delivery address? ")
         print()
         cost += 3
-        print("Your order is a delivery order for {} to {}".format(name, address))
+        print("Your order is a delivery order for {} to {}".format(name.capitalize(), address))
         print()
 
     else:
         name = input("What is your name? ")
         print()
-        print("Your order is a pick up order for {}".format(name))
+        print("Your order is a pick up order for {}".format(name.capitalize()))
         print()
 
+    # Print pizzas and pizza toppings
     print("The pizzas you are ordering are {}".format(pizzas))
     print()
     if len(pizza1_top_list) > 0:
@@ -350,6 +360,7 @@ while cancel is "y":
         print("The toppings for {} are extra: {}".format(pizzas[4], pizza5_top_list))
         print()
 
+    # Add price of pizza
     if pizzas[0] in classic_pizzas:
         cost += 8.5
     if pizzas[0] in deluxe_pizzas:
@@ -371,6 +382,7 @@ while cancel is "y":
     if len(pizzas) > 4 and pizzas[4] in deluxe_pizzas:
         cost += 13.5
 
+    # Add price of toppings
     if len(pizza1_top_list) > 0:
         cost += (len(pizza1_top_list)*0.5)
     if len(pizza2_top_list) > 0:
@@ -381,7 +393,9 @@ while cancel is "y":
         cost += (len(pizza4_top_list)*0.5)
     if len(pizza5_top_list) > 0:
         cost += (len(pizza5_top_list)*0.5)
-
+    # Cost print
     print("The total cost is ${} ".format(format(cost, '.2f')))
     print()
+
+    # Cancel or new order input
     cancel = input("Would you like to make a new order (type 'y' if yes)")
