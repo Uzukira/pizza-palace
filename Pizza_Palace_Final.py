@@ -351,8 +351,8 @@ while cancel is "y" or cancel is "Y":
         print()
         phone_number = input("What is your phone number? ")
         print()
-        print("Your order is a pick up order for {} and your phone number is {}".format(name.capitalize(),
-                                                                                        phone_number))
+        print("Your order is a pick up order for {}.".format(name.capitalize()))
+        print("Your phone number is {}".format(phone_number))
         print()
 
     # Print pizzas and pizza toppings
