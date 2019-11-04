@@ -1,4 +1,13 @@
+# This program is a pizza ordering program designed for a phone operator to use. The user can make pick up or delivery
+# orders, the order can be canceled at the end and program is restarted and the program calculates cost as well as saves
+# customers address phone # and name in receipt.
+print("This program is a pizza ordering program designed for a phone operator to use.")
+print("To use this program you must follow the prompts and answer the questions")
+print("To begin the order, choose pick up or delivery. The order may be canceled at the end")
+
 cancel = "y"
+
+another = "y"
 
 
 # Pick up or delivery function
@@ -84,13 +93,13 @@ def toppings(question, list_in):
     else:
         print("please enter a number between 0 and 12")
 
+another_valid = False
+
+toppings_confirm = False
 
 # Cancel of new order loop
 while cancel is "y" or cancel is "Y":
     # Defining variables
-    another_valid = False
-
-    toppings_confirm = False
 
     available_pizzas = ["0. Hawaiian $8.50 ", "1. Margarita $8.50 ", "2. Meat lovers $8.50 ",
                         "3. Classic Cheese $8.50 ", "4.Pepperoni $8.50 ", "5. Ham and Cheese $8.50 ",
@@ -110,8 +119,6 @@ while cancel is "y" or cancel is "Y":
 
     cost = 0
 
-    another = "y"
-
     pizza1_top_list = []
     pizza2_top_list = []
     pizza3_top_list = []
@@ -124,7 +131,7 @@ while cancel is "y" or cancel is "Y":
     pizza5_top = ""
 
     # main routine
-    order_type = pick_delivery("Would you like to have your order delivered? (y/n) ").lower()
+    order_type = pick_delivery("Would you like to have your order delivered? (y/n) (delivery costs $3) ").lower()
 
     print()
     print(classic_pizzas)
@@ -133,7 +140,7 @@ while cancel is "y" or cancel is "Y":
 
     # Add pizzas to users list
     pizzas = pizza_list("Enter the number of the pizza you would like and press any letter when finished ordering"
-                        " (pizza limit is 5) ", available_pizzas)
+                        " (pizza limit is 5, pizzas 0 - 6 are $8.50 and pizzas 7 - 11 are $13.50) ", available_pizzas)
     print()
 
     # Add toppings to respective pizzas
@@ -342,8 +349,8 @@ while cancel is "y" or cancel is "Y":
         phone_number = input("What is your phone number? ")
         print()
         cost += 3
-        print("Your order is a delivery order for {} to {} and your phone number is {}".format(name.capitalize(),
-                                                                                               address, phone_number))
+        print("Your order is a delivery order for {}. To {} and your phone number is {}".format(name.capitalize(),
+                                                                                                address, phone_number))
         print()
 
     else:
